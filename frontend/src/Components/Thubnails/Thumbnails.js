@@ -26,7 +26,7 @@ export default function Thumbnails({ foods }) {
                 ❤
               </span>
               <div className={classes.star}>
-                <StarRating stars={foods.stars} />
+                <StarRating stars={food.stars} />
               </div>
               <div className={classes.product_item_footer}>
                 <div className={classes.origins}>
