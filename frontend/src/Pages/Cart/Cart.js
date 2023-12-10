@@ -4,6 +4,7 @@ import Title from "../../Components/Title/Title";
 import classes from "./cart.module.css";
 import { Link } from "react-router-dom";
 import Price from "../../Components/pRICE/Price";
+import NotFound from "../../Components/NotFound/NotFound";
 
 export default function Cart() {
   const { cart, removeFromCart, changeQuantity } = useCart();
@@ -11,7 +12,9 @@ export default function Cart() {
     <>
       <Title title="Cart Page" margin="1.5rem 0 0 2.5rem" />
 
-      {cart && cart.items.length > 0 && (
+      {cart.items.length === 0 ? (
+        <NotFound message={"Your Cart is empty"} linkText={"Explore Foods"} />
+      ) : (
         <div className={classes.container}>
           <ul className={classes.list}>
             {cart.items.map((item) => (
