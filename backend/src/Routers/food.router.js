@@ -26,7 +26,7 @@ router.get("/search/:searchTerm", (req, res) => {
 //   res.send(foods);
 // });
 
-router.get("/tags/:tag", (req, res) => {
+router.get("/tag/:tag", (req, res) => {
   const { tag } = req.params;
   const foods = sample_foods.filter((item) => item.tags?.includes(tag));
   res.send(foods);
