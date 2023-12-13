@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { sample_foods, sample_tags } from "../data.js"; // remember to put .js when importing from other modules apart from node modules.
+import { sample_foods, sample_tags } from "../data.js";
 
 const router = Router();
 
-//'/' jb yh call hoeyga toh homepage call hoeygaa and usko sample foods serve krenge
 router.get("/", (req, res) => {
   res.send(sample_foods);
 });
@@ -19,12 +18,6 @@ router.get("/search/:searchTerm", (req, res) => {
   );
   res.send(foods);
 });
-
-// router.get("/tag/:tag", (req, res) => {
-//   const { tag } = req.params;
-//   const foods = sample_foods.filter((item) => item.tags?.includes(tag));
-//   res.send(foods);
-// });
 
 router.get("/tag/:tag", (req, res) => {
   const { tag } = req.params;
