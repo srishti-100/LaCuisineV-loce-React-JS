@@ -18,7 +18,7 @@ export default function LoginPage() {
 
   const { user, login } = useAuth();
 
-  const { params } = useSearchParams();
+  const [params] = useSearchParams();
 
   const returnUrl = params.get("returnUrl");
 
