@@ -6,6 +6,7 @@ import handler from "express-async-handler";
 import { UserModel } from "../Models/user.model.js";
 import bcrypt from "bcryptjs";
 
+const PASSWORD_HASH_SALT_ROUNDS = 10;
 const router = Router();
 
 router.post(
@@ -19,6 +20,35 @@ router.post(
     }
 
     res.status(BAD_REQUEST).send("Username or Password invalid");
+  })
+);
+
+router.post(
+  "/register",
+  handler(async (req, res) => {
+    const { name, email, password, address } = req.body;
+
+    const user = await UserModel.findOne({ email });
+
+    if (user) {
+      res.send(BAD_REQUEST).send("User already exists, please Login!");
+      return;
+    }
+
+    const hashedPassword = await bcrypt.hash(
+      password,
+      PASSWORD_HASH_SALT_ROUNDS
+    );
+
+    const newUser = {
+      name,
+      email: email.toLowerCase(),
+      password: hashedPassword,
+      address,
+    };
+    const result = await UserModel.create(newUser);
+
+    res.send(generateTokenResponse(result));
   })
 );
 
